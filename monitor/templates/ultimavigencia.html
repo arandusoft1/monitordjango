@@ -1,0 +1,25 @@
+{% extends "tabla.html" %}
+
+{% block title %}<title>Ultima Vigencia</title>{% endblock %}
+
+{% block nav-index %}<a href={% url 'index' %}>Tabla completa</a>{% endblock %}
+{% block nav-ultima %}<a class="active" href={% url 'ultima' %}>Ultima vigencia</a>{% endblock %}
+
+{% block table-body %}
+    <tbody>
+        {% for elemento in Empresas %}
+
+            {% if elemento.color == "V" %}
+                <tr class="verde">
+                    <td>{{elemento.Empresa}}</td>
+                    <td>{{elemento.Sucursal}}</td>
+                    <td>{{elemento.fVigencia}}</td>
+                    <td>{{elemento.CantPrecio}}</td>
+                    <td>{{elemento.fAct}}</td>
+                </tr>
+            {% endif %}
+
+        {% endfor %}
+    <tbody>
+{% endblock %}
+

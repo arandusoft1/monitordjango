@@ -1,0 +1,24 @@
+{% extends "tabla.html" %}
+
+{% block title %}<title>Vigencia mayor a 12hs</title>{% endblock %}
+
+{% block nav-index %}<a href={% url 'index' %}>Tabla completa</a>{% endblock %}
+{% block nav-mayora12 %}<a class="active" href={% url 'menor12' %}>Vigencia mayor a 12 hs</a>{% endblock %}
+
+{% block table-body %}
+    <tbody>
+        {% for elemento in Empresas %}
+
+            {% if elemento.color == "R" %}
+                <tr class="rojo">
+                    <td>{{elemento.Empresa}}</td>
+                    <td>{{elemento.Sucursal}}</td>
+                    <td>{{elemento.fVigencia}}</td>
+                    <td>{{elemento.CantPrecio}}</td>
+                    <td>{{elemento.fAct}}</td>
+                </tr>
+            {% endif %}
+
+        {% endfor %}
+    </tbody>
+{% endblock %}

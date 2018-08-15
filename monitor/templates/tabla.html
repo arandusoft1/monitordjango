@@ -1,0 +1,140 @@
+<html>
+    <head>
+        {% block title %}<title>Tabla de vigencias</title>{% endblock %}
+        {% load staticfiles %}
+
+	    <link rel="icon" type="image/png" href="{% static 'imagen/favicon.png' %}" />
+	    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	    <link href="{% static 'css/cssfriar.css' %}" rel="stylesheet">
+	
+        <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/jquery.tablesorter.js' %}"></script>
+        <script>
+            $(document).ready(function() {
+                //cuando la página se cargue convertimos la tabla con id "simple" en una tabla ordenable
+                    $("#principal").tableSorter();
+            });
+        </script>
+	
+	
+	
+    </head>
+
+    <body bgcolor=#fffff>
+        <div class="sticky">
+      	    <table id="logo" style="width: 100%;border: hidden;">
+                <tr >
+                    <th  align="center" style="padding-right: 0px;width: 200px;"><img src="{% static 'imagen/logofriarconpata.png' %}" alt="Norway" style="float:left;width="100px"; height: 62px;"></th>
+                    <th  style="padding-left: 0px; padding-right: 0px;"><img  src="{% static 'imagen/patafriar.png' %}" alt="Paris" style="float:left;width: 100%;margin-top: 41px;height: 120.703;height: 0px;"></th>
+                    <th  style="padding-left: 0px;width: 5px;"><img  src="{% static 'imagen/tapadepata.png' %}" alt="Paris" style="float:left;width: 5px;margin-top: 41px;height: 20px;"></th>
+                </tr>
+	        </table>
+        </div>
+      
+        <div>
+            {% block nav %}
+                <ul id="fuente">
+                    <li>{% block nav-index %}<a class="active" href={% url 'index' %}>Tabla completa</a>{% endblock %}</li>
+                    <li>{% block nav-ultima %}<a href={% url 'ultima' %}>Ultima vigencia</a>{% endblock %}</li>
+                    <li>{% block nav-menor12 %}<a href={% url 'menor12' %}>Vigencia menor a 12 hs</a>{% endblock %}</li>
+                    <li>{% block nav-mayora12 %}<a href={% url 'mayora12' %}>Vigencia mayor a 12 hs</a>{% endblock %}</li>
+
+                    <li>
+                        {% block nav-buscador %}
+
+                            <form action={% url 'buscador' %} style="margin-bottom: 0px;" method="get">{% csrf_token %}
+
+                                <div class="box">
+                                    <div class="container-4">
+
+                                        <input name="sucursal" type="search" id="search" placeholder="Buscar sucursal..." required  />
+                                        <button type="submit" class="icon"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        {% endblock %}
+                    </li>
+                </ul>
+            {% endblock %}
+
+            <div style="padding:1px 16px;height:869px;" class="a">
+
+                <div align="center" id="fuente" style="min-width: 272px;">
+                    {% block mensaje %}<h1>La ultima vigencia es {{ultact}} </h1>{% endblock %}
+                </div>
+
+                {% block table %}
+                    <table style="width:90%" align="center" id="principal">
+
+                        <thead>
+                            <tr>
+                                <th>Empresa</th>
+                                <th>Sucursal</th>
+                                <th>Fecha de Vigencia</th>
+                                <th>Cantidad de Precios</th>
+                                <th>Fecha de Actualizacion</th>
+                            </tr>
+                        </thead>
+
+                        {% block table-body %}
+                            <tbody>
+                                {% for elemento in Empresas %}
+
+                                    {% if elemento.color == "R" %}
+                                        <tr class="rojo">
+                                            <td>{{elemento.Empresa}}</td>
+                                            <td>{{elemento.Sucursal}}</td>
+                                            <td>{{elemento.fVigencia}}</td>
+                                            <td>{{elemento.CantPrecio}}</td>
+                                            <td>{{elemento.fAct}}</td>
+                                        </tr>
+                                    {% else %}
+                                        {% if elemento.color == "V" %}
+                                            <tr class="verde">
+                                                <td>{{elemento.Empresa}}</td>
+                                                <td>{{elemento.Sucursal}}</td>
+                                                <td>{{elemento.fVigencia}}</td>
+                                                <td>{{elemento.CantPrecio}}</td>
+                                                <td>{{elemento.fAct}}</td>
+                                            </tr>
+                                        {% else %}
+                                            <tr class="amarillo">
+                                                <td>{{elemento.Empresa}}</td>
+                                                <td>{{elemento.Sucursal}}</td>
+                                                <td>{{elemento.fVigencia}}</td>
+                                                <td>{{elemento.CantPrecio}}</td>
+                                                <td>{{elemento.fAct}}</td>
+                                            </tr>
+                                        {% endif %}
+                                    {% endif %}
+
+                                {% endfor %}
+
+                            </tbody>
+                        {% endblock %}
+
+                    </table>
+                {% endblock %}
+
+                <table style="width:90%; border: hidden; color: darkslategrey;" align="center" class="foot" >
+                    <tr style="text-align:left; border: hidden;">
+                        <th style="text-align:left; border: hidden">&nbsp</th>
+                    </tr>
+                    <tr style="text-align:left; border: hidden;">
+                        <th style="text-align:left; border: hidden"><font color="#118c11">■</font>&nbspUltima vigencia</th>
+                    </tr>
+                    <tr style="border: hidden">
+                        <td style="border: hidden"><font color="#cece1e">■</font>&nbspVigencia menor a 12 hs sin actualizar</td>
+                    </tr>
+                    <tr style="border: hidden">
+                        <td style="border: hidden"><font color="#bf5858">■</font>&nbspVigencia mayor a 12 hs sin actualizar</td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,42 @@
+{% extends "tabla.html" %}
+
+{% block title %}<title>Buscador</title>{% endblock %}
+
+{% block nav-index %}<a href={% url 'index' %}>Tabla completa</a>{% endblock %}
+
+{% block table-body %}
+    <tbody>
+        {% for elemento in Empresas %}
+
+            {% if elemento.color == "R" %}
+                <tr class="rojo">
+                    <td>{{elemento.Empresa}}</td>
+                    <td>{{elemento.Sucursal}}</td>
+                    <td>{{elemento.fVigencia}}</td>
+                    <td>{{elemento.CantPrecio}}</td>
+                    <td>{{elemento.fAct}}</td>
+                </tr>
+            {% else %}
+                {% if elemento.color == "V" %}
+                    <tr class="verde">
+                        <td>{{elemento.Empresa}}</td>
+                        <td>{{elemento.Sucursal}}</td>
+                        <td>{{elemento.fVigencia}}</td>
+                        <td>{{elemento.CantPrecio}}</td>
+                        <td>{{elemento.fAct}}</td>
+                    </tr>
+                {% else %}
+                    <tr class="amarillo">
+                        <td>{{elemento.Empresa}}</td>
+                        <td>{{elemento.Sucursal}}</td>
+                        <td>{{elemento.fVigencia}}</td>
+                        <td>{{elemento.CantPrecio}}</td>
+                        <td>{{elemento.fAct}}</td>
+                    </tr>
+                {% endif %}
+            {% endif %}
+
+
+        {% endfor %}
+    </tbody>
+{% endblock %}
