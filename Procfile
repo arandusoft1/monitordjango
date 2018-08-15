@@ -1,1 +1,1 @@
-web: gunicorn ARVentasAPI.wsgi
+web: gunicorn MonitorDjangoAPI.wsgi
