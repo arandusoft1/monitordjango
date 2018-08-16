@@ -212,7 +212,7 @@ def menor12(request):
         print result'''
 
 def mandarmenssage():
-    print result
+    #print result
     global maxVigencia
     print maxVigencia
     queryset = MonitorEmpresas.objects.all().order_by('-fvigencia')
