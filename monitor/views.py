@@ -56,7 +56,7 @@ class MonitorEmpresasViewSet(ModelViewSet):
         print request.data[0]["fvigencia"] + 'algo'
 
         print 'algo'
-        mandarmenssage()
+        #mandarmenssage()
 
         try:
             bus1 = bus[0]
@@ -181,7 +181,7 @@ def menor12(request):
     queryset = MonitorEmpresas.objects.all().order_by('-fvigencia')
     ultvigencia = queryset[0].fvigencia
 
-    mandarmenssage()
+    #mandarmenssage()
 
     da1 = datetime.datetime.strptime(ultvigencia, fmt)
 
@@ -212,8 +212,7 @@ def menor12(request):
         print result'''
 
 def mandarmenssage():
-    print('holas')	
-    '''#print result
+    #print result
     global maxVigencia
     print maxVigencia
     queryset = MonitorEmpresas.objects.all().order_by('-fvigencia')
@@ -238,12 +237,4 @@ def mandarmenssage():
             result = push_service.notify_single_device(registration_id=registration_id, message_title=message_title, message_body=message_body)
             print result
         else:
-            maxVigencia = ultvigencia```
-
-
-
-
-
-
-
-
+            maxVigencia = ultvigencia
