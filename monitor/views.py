@@ -212,6 +212,7 @@ def menor12(request):
         print result'''
 
 def mandarmenssage():
+    print('holas')	
     '''#print result
     global maxVigencia
     print maxVigencia
@@ -238,6 +239,7 @@ def mandarmenssage():
             print result
         else:
             maxVigencia = ultvigencia```
+
 
 
 
