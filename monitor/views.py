@@ -212,7 +212,7 @@ def menor12(request):
         print result'''
 
 def mandarmenssage():
-    #print result
+    '''#print result
     global maxVigencia
     print maxVigencia
     queryset = MonitorEmpresas.objects.all().order_by('-fvigencia')
@@ -237,7 +237,7 @@ def mandarmenssage():
             result = push_service.notify_single_device(registration_id=registration_id, message_title=message_title, message_body=message_body)
             print result
         else:
-            maxVigencia = ultvigencia
+            maxVigencia = ultvigencia```
 
 
 
